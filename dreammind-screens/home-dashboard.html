@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Screen</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 CDN (compatible with html2canvas) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Iconify Icons -->
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+  <!-- No pre-cached icons -->
+
+  <script>
+    // Tailwind v3 configuration with custom theme colors
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'rgb(var(--background) / <alpha-value>)',
+            foreground: 'rgb(var(--foreground) / <alpha-value>)',
+            card: {
+              DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+              foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+            },
+            popover: {
+              DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+              foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+            },
+            primary: {
+              DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+              foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+            },
+            secondary: {
+              DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+              foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+            },
+            muted: {
+              DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+              foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+            },
+            accent: {
+              DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+              foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+            },
+            destructive: {
+              DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+              foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+            },
+            border: 'rgb(var(--border) / <alpha-value>)',
+            input: 'rgb(var(--input) / <alpha-value>)',
+            ring: 'rgb(var(--ring) / <alpha-value>)',
+            chart: {
+              1: 'var(--chart-1)',
+              2: 'var(--chart-2)',
+              3: 'var(--chart-3)',
+              4: 'var(--chart-4)',
+              5: 'var(--chart-5)',
+            },
+          },
+          fontFamily: {
+            sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+            heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+            serif: ['var(--font-serif)', 'Georgia', 'serif'],
+            mono: ['var(--font-mono)', 'monospace'],
+          },
+          borderRadius: {
+            sm: 'calc(var(--radius) - 4px)',
+            md: 'calc(var(--radius) - 2px)',
+            lg: 'var(--radius)',
+            xl: 'calc(var(--radius) + 4px)',
+            '2xl': 'calc(var(--radius) + 8px)',
+            '3xl': 'calc(var(--radius) + 12px)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* CSS Custom Properties - Theme Values */
+    :root {
+      --background: 11 15 31;
+      --foreground: 244 245 251;
+
+      --card: 22 27 51;
+      --card-foreground: 244 245 251;
+
+      --popover: 22 27 51;
+      --popover-foreground: 244 245 251;
+
+      --primary: 124 111 240;
+      --primary-foreground: 244 245 251;
+
+      --secondary: 31 37 71;
+      --secondary-foreground: 154 160 192;
+
+      --muted: 31 37 71;
+      --muted-foreground: 92 99 136;
+
+      --accent: 127 227 196;
+      --accent-foreground: 11 15 31;
+
+      --destructive: 255 107 107;
+      --destructive-foreground: 255 255 255;
+
+      --border: 38 44 72;
+      --input: 38 44 72;
+      --ring: 124 111 240;
+
+      --radius: 1rem;
+
+      --chart-1: #7C6FF0;
+      --chart-2: #8B7BFF;
+      --chart-3: #9AA8FF;
+      --chart-4: #7FE3C4;
+      --chart-5: #A48BFF;
+
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    /* Apply base font */
+    body {
+      font-family: var(--font-sans);
+      background-color: rgb(var(--background));
+      color: rgb(var(--foreground));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide scrollbars globally (both vertical and horizontal) */
+    * {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+    *::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    /* Safe area utilities for mobile */
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    .pl-safe { padding-left: env(safe-area-inset-left, 0px); }
+    .pr-safe { padding-right: env(safe-area-inset-right, 0px); }
+
+    /* Hide scrollbar but allow scrolling */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Smooth transitions for interactive elements */
+    button, a, [role="button"] {
+      transition: all 0.15s ease;
+    }
+
+    /* Better image rendering */
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col h-screen bg-background overflow-hidden font-sans text-foreground select-none relative">
+    
+    <!-- Background Star Particles Layer -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute top-[10%] left-[15%] w-[3px] h-[3px] bg-white/40 rounded-full blur-[0.5px]"></div>
+        <div class="absolute top-[25%] right-[20%] w-[4px] h-[4px] bg-primary/40 rounded-full blur-[1px]"></div>
+        <div class="absolute top-[40%] left-[85%] w-[2px] h-[2px] bg-white/20 rounded-full"></div>
+        <div class="absolute top-[5%] left-[55%] w-[5px] h-[5px] bg-accent/20 rounded-full blur-[1.5px]"></div>
+        <div class="absolute bottom-[35%] left-[15%] w-[4px] h-[4px] bg-primary/30 rounded-full blur-[1px]"></div>
+        <div class="absolute bottom-[25%] right-[10%] w-[3px] h-[3px] bg-white/30 rounded-full blur-[0.5px]"></div>
+        
+        <!-- Ambient Glows -->
+        <div class="absolute -top-[10%] -right-[10%] w-[70%] h-[40%] bg-primary/10 rounded-full blur-[80px]"></div>
+        <div class="absolute top-[40%] -left-[10%] w-[50%] h-[30%] bg-accent/5 rounded-full blur-[60px]"></div>
+    </div>
+
+    <!-- Top Header -->
+    <div class="px-6 pt-14 pb-4 flex justify-between items-center relative z-10">
+        <div>
+            <h1 class="font-heading text-[24px] font-bold tracking-tight text-foreground">Good evening, Alex 🌙</h1>
+            <p class="text-[14px] text-muted-foreground">Ready for a restful night?</p>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center border border-border/50 overflow-hidden">
+            <img src="https://i.pravatar.cc/150?u=99" class="w-full h-full object-cover" alt="Avatar" />
+        </div>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div class="flex-1 overflow-y-auto no-scrollbar px-6 pb-32 relative z-10">
+        
+        <!-- Hero Sleep Card -->
+        <div class="mt-4 relative group">
+            <div class="absolute -inset-0.5 bg-primary/10 blur-[20px] rounded-[28px] pointer-events-none"></div>
+            <div class="relative w-full bg-card border-t border-white/10 rounded-[28px] p-8 shadow-2xl">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <span class="text-muted-foreground text-[14px] font-medium uppercase tracking-widest">Last Night's Sleep</span>
+                        <div class="text-[48px] font-bold tracking-tighter tabular-nums text-foreground mt-1">7h 24m</div>
+                    </div>
+                    <div class="bg-primary/20 px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-primary/20">
+                        <div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(124,111,240,0.8)]"></div>
+                        <span class="text-primary font-bold text-[14px]">82/100</span>
+                    </div>
+                </div>
+
+                <!-- Waveform Chart (SVG) -->
+                <div class="w-full h-16 mt-4 flex items-end gap-1">
+                    <div class="flex-1 h-[40%] bg-primary/20 rounded-t-sm"></div>
+                    <div class="flex-1 h-[60%] bg-primary/30 rounded-t-sm"></div>
+                    <div class="flex-1 h-[30%] bg-primary/20 rounded-t-sm"></div>
+                    <div class="flex-1 h-[80%] bg-primary/50 block rounded-t-sm relative">
+                        <div class="absolute inset-0 bg-primary blur-[4px] opacity-30"></div>
+                    </div>
+                    <div class="flex-1 h-[95%] bg-primary rounded-t-sm relative">
+                        <div class="absolute inset-0 bg-primary blur-[6px] opacity-40"></div>
+                    </div>
+                    <div class="flex-1 h-[60%] bg-primary/60 rounded-t-sm"></div>
+                    <div class="flex-1 h-[40%] bg-primary/30 rounded-t-sm"></div>
+                    <div class="flex-1 h-[20%] bg-primary/20 rounded-t-sm"></div>
+                    <div class="flex-1 h-[45%] bg-primary/40 rounded-t-sm"></div>
+                    <div class="flex-1 h-[75%] bg-primary/70 rounded-t-sm"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions Grid -->
+        <div class="grid grid-cols-3 gap-4 mt-8">
+            <div class="aspect-square bg-secondary rounded-[24px] border border-border/50 flex flex-col items-center justify-center gap-2">
+                <div class="text-primary">
+                    <iconify-icon icon="lucide:bed-double" width="28" height="28"></iconify-icon>
+                </div>
+                <span class="text-[13px] font-medium">Log Sleep</span>
+            </div>
+            <div class="aspect-square bg-secondary rounded-[24px] border border-border/50 flex flex-col items-center justify-center gap-2 text-accent">
+                <iconify-icon icon="lucide:alarm-clock" width="28" height="28"></iconify-icon>
+                <span class="text-[13px] font-medium text-foreground">Set Alarm</span>
+            </div>
+            <div class="aspect-square bg-secondary rounded-[24px] border border-border/50 flex flex-col items-center justify-center gap-2">
+                <div class="text-primary">
+                    <iconify-icon icon="lucide:message-circle" width="28" height="28"></iconify-icon>
+                </div>
+                <span class="text-[13px] font-medium">AI Coach</span>
+            </div>
+        </div>
+
+        <!-- AI Tip Card -->
+        <div class="mt-8 bg-card border border-border/50 rounded-[24px] p-5 flex gap-4 items-center">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 relative">
+                <div class="absolute inset-0 bg-primary/10 blur-md rounded-full"></div>
+                <iconify-icon icon="lucide:sparkles" class="text-primary relative z-10" width="24" height="24"></iconify-icon>
+            </div>
+            <div>
+                <h4 class="text-[15px] font-bold text-foreground">AI Insight</h4>
+                <p class="text-[14px] text-muted-foreground leading-snug">Drinking herbal tea 30 mins before bed could improve your deep sleep by 12%.</p>
+            </div>
+        </div>
+
+        <!-- Section Title -->
+        <div class="mt-10 flex justify-between items-center mb-4">
+            <h3 class="text-[18px] font-bold">Nightly Routine</h3>
+            <span class="text-primary text-[14px] font-medium">View all</span>
+        </div>
+
+        <!-- Routine List -->
+        <div class="space-y-3">
+            <div class="w-full bg-secondary/50 p-4 rounded-[20px] flex items-center justify-between border border-border/30">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-card flex items-center justify-center text-muted-foreground">
+                        <iconify-icon icon="lucide:wind" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="text-[15px] font-semibold">Breathing Exercise</div>
+                        <div class="text-[12px] text-muted-foreground">5 minutes • Guided</div>
+                    </div>
+                </div>
+                <iconify-icon icon="lucide:chevron-right" class="text-muted-foreground" width="20" height="20"></iconify-icon>
+            </div>
+            <div class="w-full bg-secondary/50 p-4 rounded-[20px] flex items-center justify-between border border-border/30">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-card flex items-center justify-center text-muted-foreground">
+                        <iconify-icon icon="lucide:music" width="22" height="22"></iconify-icon>
+                    </div>
+                    <div>
+                        <div class="text-[15px] font-semibold">Deep Rain Ambience</div>
+                        <div class="text-[12px] text-muted-foreground">Continuous • Audio</div>
+                    </div>
+                </div>
+                <iconify-icon icon="lucide:play-circle" class="text-primary" width="24" height="24"></iconify-icon>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 w-full px-6 pb-8 pt-4 bg-background/80 backdrop-blur-xl border-t border-border/40 z-50">
+        <div class="flex justify-between items-center px-4">
+            <div class="flex flex-col items-center gap-1.5 text-primary">
+                <iconify-icon icon="lucide:moon" width="24" height="24"></iconify-icon>
+                <span class="text-[10px] font-bold">Home</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5 text-muted-foreground">
+                <iconify-icon icon="lucide:bed-double" width="24" height="24"></iconify-icon>
+                <span class="text-[10px] font-medium">Log</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5 text-muted-foreground">
+                <iconify-icon icon="lucide:bar-chart-2" width="24" height="24"></iconify-icon>
+                <span class="text-[10px] font-medium">Stats</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5 text-muted-foreground">
+                <iconify-icon icon="lucide:sparkles" width="24" height="24"></iconify-icon>
+                <span class="text-[10px] font-medium">Coach</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5 text-muted-foreground">
+                <iconify-icon icon="lucide:user" width="24" height="24"></iconify-icon>
+                <span class="text-[10px] font-medium">Profile</span>
+            </div>
+        </div>
+        <!-- iPhone Safe Indicator Spacer -->
+        <div class="h-2 w-full mt-4"></div>
+    </div>
+</div>
+</body>
+</html>
